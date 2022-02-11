@@ -1,0 +1,3 @@
+delta(my_counter_total{instance="host.docker.internal:8080",job="prometheus"}[1m])
+my_gauge{instance="host.docker.internal:8080",job="prometheus"}
+my_timer_seconds_count{}

@@ -1,0 +1,30 @@
+version: '3.1'
+services:
+  grafana:
+    image: grafana/grafana:6.2.5
+    ports:
+    - 3000:3000
+    volumes:
+    - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password123
+      - GF_USERS_ALLOW_SIGN_UP=false
+    depends_on:
+      - prometheus
+  prometheus:
+    image: prom/prometheus:v2.11.1
+    ports:
+    - 9090:9090
+    volumes:
+    - ./:/etc/prometheus/
+    - prometheus_data:/prometheus
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+  prometheus-client:
+    image: prometheus-poc
+    ports:
+    - 8080:8080
+volumes:
+  prometheus_data: {}
+  grafana_data: {}

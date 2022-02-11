@@ -1,0 +1,10 @@
+groups:
+- name: example
+  rules:
+  - alert: HighErrorRate
+    expr: jvm_gc_collection_seconds_count{job="prometheus"} > 0.5
+    for: 10m
+    labels:
+      severity: page
+    annotations:
+      summary: High request latency
